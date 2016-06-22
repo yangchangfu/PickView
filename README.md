@@ -1,5 +1,6 @@
 
-# PickView
+##PickView
+
 A android pick view
 
 ##Demo
@@ -352,11 +353,11 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
 
 * If you have questions, please contact me
 ```java
-QQ:276054866
+QQ : 276054866
 ```
 
 ##Dependence
-*   [WheelView](https://github.com/JakeWharton/NineOldAndroids)
+*   Yuri Kanivets [WheelView]()
 
 ##Thanks
-*   [Numeric wheel view](Yuri Kanivets)
+*   Yuri Kanivets [Numeric wheel view](Yuri Kanivets)
