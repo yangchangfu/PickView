@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
         System.out.println(jString);
 
         try {
+
             JSONObject jsonObject = new JSONObject(jString);
             JSONObject obj1 = jsonObject.getJSONObject("cities");
 
@@ -208,6 +209,7 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
     public String readDataFromAssetsFile(Context context, String fileName) {
 
         try {
+            
             InputStreamReader inputReader = new InputStreamReader(context.getResources().getAssets().open(fileName));
             BufferedReader bufReader = new BufferedReader(inputReader);
             String line = "";
