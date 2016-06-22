@@ -9,6 +9,7 @@ A android pick view
 
 <p>
     <img src="https://github.com/yangchangfu/PickView/blob/master/images/preview_1.png" width="320" alt="Screenshot" />
+    <img src="https://github.com/yangchangfu/PickView/blob/master/images/preview_2.png" width="320" alt="Screenshot" />
 </p>
 
 ##Gradle
