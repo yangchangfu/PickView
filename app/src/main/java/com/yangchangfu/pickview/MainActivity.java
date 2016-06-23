@@ -26,16 +26,27 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
 
     private List<Item> cityItems;
     private PickView cityPickView;
-    private Button button;
+
+    private List<Item> cates;
+    private PickView catePickView;
+
+    private List<Item> datas;
+    private PickView dataPickView;
+
+    private Button button1, button2, button3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = (Button) findViewById(R.id.button);
+        button1 = (Button) findViewById(R.id.button1);
+        button2 = (Button) findViewById(R.id.button2);
+        button3 = (Button) findViewById(R.id.button3);
 
-        initCityData();
+        initCitys();
+        initCates();
+        initDatas();
     }
 
     /**
@@ -43,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
      *
      * @param view
      */
-    public void selectCityClick(View view){
+    public void selectCityClick(View view) {
 
         cityPickView = new PickView(this);
         cityPickView.setPickerView(cityItems, PickView.Style.THREE);
@@ -52,32 +63,139 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
         cityPickView.show();
     }
 
+    /**
+     * 选择类型
+     *
+     * @param view
+     */
+    public void selectCateClick(View view) {
+
+        catePickView = new PickView(this);
+        catePickView.setPickerView(cates, PickView.Style.DOUBLE);
+        catePickView.setShowSelectedTextView(true);
+        catePickView.setOnSelectListener(this);
+        catePickView.show();
+    }
+
+    /**
+     * 选择数据
+     *
+     * @param view
+     */
+    public void selectDataClick(View view) {
+
+        dataPickView = new PickView(this);
+        dataPickView.setPickerView(datas, PickView.Style.SINGLE);
+        dataPickView.setShowSelectedTextView(true);
+        dataPickView.setOnSelectListener(this);
+        dataPickView.show();
+    }
+
     @Override
     public void OnSelectItemClick(View view, int[] selectedIndexs, String selectedText) {
 
         System.out.println("-----------------OnSelectItemClick-----------------");
         System.out.println("view class = " + view.getClass());
 
-        for (int i=0; i<selectedIndexs.length; i++){
-            System.out.println("selectedIndexs[" + i +"] = " + selectedIndexs[i]);
+        for (int i = 0; i < selectedIndexs.length; i++) {
+            System.out.println("selectedIndexs[" + i + "] = " + selectedIndexs[i]);
         }
-
         System.out.println("selectedText = " + selectedText);
 
         //更新按钮
-        button.setText(selectedText);
+        if (view == cityPickView) {
+            button1.setText(selectedText);
+        } else if (view == catePickView) {
+            button2.setText(selectedText);
+        } else {
+            button3.setText(selectedText);
+        }
+    }
+
+    /**
+     * 初始化数据
+     */
+    public void initDatas() {
+        List<Item> items = new ArrayList<>();
+
+        String[] data = {"农家乐", "亲子园", "欢乐谷", "游泳馆", "其他"};
+
+        for (int i = 0; i < data.length; i++) {
+            Item item = new Item();
+            item.name = data[i];
+
+            items.add(item);
+        }
+
+        this.datas = items;
+    }
+
+    /**
+     * 初始化分类的数据
+     */
+    public void initCates() {
+        List<Item> items = new ArrayList<>();
+
+        String[] data = {"电影", "音乐", "电台", "游戏"};
+        String[] data1 = {"速度与激情7", "魔兽", "变形金刚4", "孤岛危机", "生化危机4"};
+        String[] data2 = {"爱你一万年", "死了都要爱", "我相信", "默", "其他"};
+        String[] data3 = {"时光电台", "其他"};
+        String[] data4 = {"魔兽", "传奇", "孤岛危机", "穿越火箭", "其他"};
+
+
+        for (int i = 0; i < data.length; i++) {
+            Item item = new Item();
+            item.name = data[i];
+
+            List<Item> items1 = new ArrayList<>();
+
+            if (i == 0){
+                for (int j = 0; j < data1.length; j++) {
+                    Item item1 = new Item();
+                    item1.name = data1[j];
+                    items1.add(item1);
+                }
+            }
+            else if (i == 1){
+                for (int j = 0; j < data2.length; j++) {
+                    Item item1 = new Item();
+                    item1.name = data2[j];
+                    items1.add(item1);
+                }
+            }
+            else if (i == 2){
+                for (int j = 0; j < data3.length; j++) {
+                    Item item1 = new Item();
+                    item1.name = data3[j];
+                    items1.add(item1);
+                }
+            }
+            else if (i == 3){
+                for (int j = 0; j < data4.length; j++) {
+                    Item item1 = new Item();
+                    item1.name = data4[j];
+                    items1.add(item1);
+                }
+            }
+
+            item.items = items1;
+
+            items.add(item);
+        }
+
+        this.cates = items;
     }
 
     /**
      * 初始化城市的数据
      */
-    public void initCityData() {
+    public void initCitys() {
 
         //获取所有的省市数据
         List<ProvinceModel> provices = readAllCityData();
         List<Item> items = new ArrayList<>();
 
-        for (int i=0; i<provices.size(); i++){
+        for (int i = 0; i < provices.size(); i++) {
 
             ProvinceModel province = provices.get(i);
             Item item = new Item();
@@ -87,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
             List<CityModel> citys = province.getCityList();
             List<Item> items1 = new ArrayList<>();
 
-            for (int j=0; j<citys.size(); j++){
+            for (int j = 0; j < citys.size(); j++) {
 
                 CityModel city = citys.get(j);
                 Item item1 = new Item();
@@ -97,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
                 List<DistrictModel> districts = city.getDistrictList();
                 List<Item> items2 = new ArrayList<>();
 
-                for (int k=0; k<districts.size(); k++){
+                for (int k = 0; k < districts.size(); k++) {
 
                     DistrictModel district = districts.get(k);
 
