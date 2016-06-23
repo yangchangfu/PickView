@@ -3,12 +3,21 @@
 
 Android数据选择器，欢迎使用。好用的话，亲，赏个星星吧❤️
 
-＃Android选择器的类型：
+##Android选择器的类型：
 * 三列联动：PickView.Style.THREE
 * 两列联动：PickView.Style.DOUBLE
 * 一列：    PickView.Style.SINGLE
 
-＃使用方法：pickView.setPickerView(datas, PickView.Style.THREE);
+```
+public enum Style {
+        SINGLE, DOUBLE, THREE
+    }
+```java
+
+##使用方法：
+```
+pickView.setPickerView(datas, PickView.Style.THREE);//数据、选择器的类型
+```java
 
 ##Demo
 
