@@ -17,7 +17,7 @@ Android数据选择器，欢迎使用。好用的话，亲，赏个星星吧❤�
 <p>
     <img src="https://github.com/yangchangfu/PickView/blob/master/images/1.png" width="320" alt="Screenshot" />
     <img src="https://github.com/yangchangfu/PickView/blob/master/images/2.png" width="320" alt="Screenshot" />
-    <img src="https://github.com/yangchangfu/PickView/blob/master/images/3.jpg" width="320" alt="Screenshot" />
+    <img src="https://github.com/yangchangfu/PickView/blob/master/images/3.png" width="320" alt="Screenshot" />
 </p>
 
 ##Gradle
