@@ -19,6 +19,21 @@ public enum Style {
 pickView.setPickerView(datas, PickView.Style.THREE);//数据、选择器的类型
 ```
 
+##属性与方法：
+1、属性：isShow;//弹出状态属性
+```java
+System.out.println("pickView isshow = " + pickView.isShow);
+```
+2、show();
+```java
+pickView.show();
+```
+
+3、dismiss();
+```java
+pickView.show();
+```
+
 ##Demo
 
 ![preview_1](https://github.com/yangchangfu/PickView/blob/master/images/demo.gif)
@@ -33,7 +48,7 @@ pickView.setPickerView(datas, PickView.Style.THREE);//数据、选择器的类�
 
 ```groovy
 dependencies{
-    compile 'com.yangchangfu:pickview-lib:1.0.0'
+    compile 'com.yangchangfu:pickview-lib:1.0.1'
 }
 
 ```
