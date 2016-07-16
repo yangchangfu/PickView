@@ -27,4 +27,11 @@
         android:onClick="selectDataClick"
         android:text="选择数据" />
 
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="readStateClick"
+        android:text="读取所有状态" />
+
 </LinearLayout>

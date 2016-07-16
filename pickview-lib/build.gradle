@@ -6,7 +6,7 @@ publish {
     userOrg = 'yangchangfu'
     groupId = 'com.yangchangfu'
     artifactId = 'pickview-lib'
-    publishVersion = '1.0.0'
+    publishVersion = '1.0.1'
     desc = "a android pick view library."
     website = "https://github.com/yangchangfu/PickView"
 }

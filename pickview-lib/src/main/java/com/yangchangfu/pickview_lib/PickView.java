@@ -43,6 +43,8 @@ public class PickView extends LinearLayout implements OnWheelChangedListener, Vi
 
     private OnSelectListener onSelectListener = null;
 
+    public boolean isShow = false;
+
     public PickView(Context context) {
         this(context, null, 0);
 
@@ -243,10 +245,13 @@ public class PickView extends LinearLayout implements OnWheelChangedListener, Vi
         mRelativeLayout.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+
                 dismiss();
                 return false;
             }
         });
+
+        isShow = true;
     }
 
     public void dismiss(){
@@ -254,6 +259,7 @@ public class PickView extends LinearLayout implements OnWheelChangedListener, Vi
         if (mPopWindow != null && mPopWindow.isShowing()) {
             mPopWindow.dismiss();
             mPopWindow = null;
+            isShow = false;
         }
     }
 

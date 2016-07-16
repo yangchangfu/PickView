@@ -47,6 +47,21 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
         initCitys();
         initCates();
         initDatas();
+
+        cityPickView = new PickView(this);
+        cityPickView.setPickerView(cityItems, PickView.Style.THREE);
+        cityPickView.setShowSelectedTextView(true);
+        cityPickView.setOnSelectListener(this);
+
+        catePickView = new PickView(this);
+        catePickView.setPickerView(cates, PickView.Style.DOUBLE);
+        catePickView.setShowSelectedTextView(true);
+        catePickView.setOnSelectListener(this);
+
+        dataPickView = new PickView(this);
+        dataPickView.setPickerView(datas, PickView.Style.SINGLE);
+        dataPickView.setShowSelectedTextView(true);
+        dataPickView.setOnSelectListener(this);
     }
 
     /**
@@ -56,10 +71,8 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
      */
     public void selectCityClick(View view) {
 
-        cityPickView = new PickView(this);
-        cityPickView.setPickerView(cityItems, PickView.Style.THREE);
-        cityPickView.setShowSelectedTextView(true);
-        cityPickView.setOnSelectListener(this);
+
+
         cityPickView.show();
     }
 
@@ -70,10 +83,7 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
      */
     public void selectCateClick(View view) {
 
-        catePickView = new PickView(this);
-        catePickView.setPickerView(cates, PickView.Style.DOUBLE);
-        catePickView.setShowSelectedTextView(true);
-        catePickView.setOnSelectListener(this);
+
         catePickView.show();
     }
 
@@ -84,12 +94,22 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
      */
     public void selectDataClick(View view) {
 
-        dataPickView = new PickView(this);
-        dataPickView.setPickerView(datas, PickView.Style.SINGLE);
-        dataPickView.setShowSelectedTextView(true);
-        dataPickView.setOnSelectListener(this);
+
         dataPickView.show();
     }
+
+    /**
+     * 读取所有的状态 isShow
+     *
+     * @param view
+     */
+    public void readStateClick(View view) {
+
+        System.out.println("cityPickView isshow = " + cityPickView.isShow);
+        System.out.println("catePickView isshow = " + catePickView.isShow);
+        System.out.println("dataPickView isshow = " + dataPickView.isShow);
+    }
+
 
     @Override
     public void OnSelectItemClick(View view, int[] selectedIndexs, String selectedText) {
@@ -105,11 +125,15 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
         //更新按钮
         if (view == cityPickView) {
             button1.setText(selectedText);
+            System.out.println("cityPickView isshow = " + cityPickView.isShow);
         } else if (view == catePickView) {
             button2.setText(selectedText);
+            System.out.println("catePickView isshow = " + catePickView.isShow);
         } else {
             button3.setText(selectedText);
+            System.out.println("dataPickView isshow = " + dataPickView.isShow);
         }
+
     }
 
     /**
@@ -141,7 +165,6 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
         String[] data2 = {"爱你一万年", "死了都要爱", "我相信", "默", "其他"};
         String[] data3 = {"时光电台", "其他"};
         String[] data4 = {"魔兽", "传奇", "孤岛危机", "穿越火箭", "其他"};
-
 
         for (int i = 0; i < data.length; i++) {
             Item item = new Item();
