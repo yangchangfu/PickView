@@ -48,10 +48,18 @@ pickView.show();
 
 ```groovy
 dependencies{
-    compile 'com.yangchangfu:pickview-lib:1.0.1'
+    compile 'com.yangchangfu:pickview-lib:1.0.2'
 }
 
 ```
+
+##版本更新与问题记录：
+
+1、v1.0.1版本新增了PickView弹出视图的状态属性：isShow；
+
+2、v1.0.2版本解决的问题：
+   （1）多级同时滑动奔溃的问题；
+   （2）Android部分手机存在虚拟键盘的遮挡问题；
 
 # Usage
 
