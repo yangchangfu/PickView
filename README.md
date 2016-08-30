@@ -57,7 +57,7 @@ dependencies{
    （1）多级同时滑动奔溃的问题；
    （2）Android部分手机存在虚拟键盘的遮挡问题；
    
-1、v1.0.3版本新增了PickView弹出视图的状态监听事件接口：OnStateChangeListener；
+3、v1.0.3版本新增了PickView弹出视图的状态监听事件接口：OnStateChangeListener；
 
 # Usage
 
