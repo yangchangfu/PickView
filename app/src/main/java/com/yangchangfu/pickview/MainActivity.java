@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.yangchangfu.pickview.Model.CityModel;
 import com.yangchangfu.pickview.Model.DistrictModel;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements PickView.OnSelectListener {
+public class MainActivity extends AppCompatActivity implements PickView.OnSelectListener, PickView.OnStateChangeListener {
 
     private List<Item> cityItems;
     private PickView cityPickView;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
     private PickView dataPickView;
 
     private Button button1, button2, button3;
+    private TextView textView1,textView2,textView3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,13 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
 
+        textView1 = (TextView) findViewById(R.id.textView1);
+        textView2 = (TextView) findViewById(R.id.textView2);
+        textView3 = (TextView) findViewById(R.id.textView3);
+        textView1.setText("选择器1: 关闭");
+        textView2.setText("选择器2: 关闭");
+        textView3.setText("选择器3: 关闭");
+
         initCitys();
         initCates();
         initDatas();
@@ -52,16 +61,19 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
         cityPickView.setPickerView(cityItems, PickView.Style.THREE);
         cityPickView.setShowSelectedTextView(true);
         cityPickView.setOnSelectListener(this);
+        cityPickView.setOnStateChangeListener(this);
 
         catePickView = new PickView(this);
         catePickView.setPickerView(cates, PickView.Style.DOUBLE);
         catePickView.setShowSelectedTextView(true);
         catePickView.setOnSelectListener(this);
+        catePickView.setOnStateChangeListener(this);
 
         dataPickView = new PickView(this);
         dataPickView.setPickerView(datas, PickView.Style.SINGLE);
         dataPickView.setShowSelectedTextView(true);
         dataPickView.setOnSelectListener(this);
+        dataPickView.setOnStateChangeListener(this);
     }
 
     /**
@@ -110,6 +122,24 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
         System.out.println("dataPickView isshow = " + dataPickView.isShow);
     }
 
+    @Override
+    public void OnStateChange(View view, boolean state) {
+
+        //更新状态
+        if (view == cityPickView) {
+            textView1.setText("选择器1: " + (cityPickView.isShow?"打开":"关闭"));
+            System.out.println("cityPickView isshow = " + cityPickView.isShow);
+        }
+        else if (view == catePickView) {
+            textView2.setText("选择器2: " + (catePickView.isShow?"打开":"关闭"));
+            System.out.println("catePickView isshow = " + catePickView.isShow);
+        }
+        else {
+            textView3.setText("选择器3: " + (dataPickView.isShow?"打开":"关闭"));
+            System.out.println("dataPickView isshow = " + dataPickView.isShow);
+        }
+    }
+
 
     @Override
     public void OnSelectItemClick(View view, int[] selectedIndexs, String selectedText) {
@@ -134,6 +164,9 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
             System.out.println("dataPickView isshow = " + dataPickView.isShow);
         }
 
+        textView1.setText("选择器1: " + (cityPickView.isShow?"打开":"关闭"));
+        textView2.setText("选择器2: " + (catePickView.isShow?"打开":"关闭"));
+        textView3.setText("选择器3: " + (dataPickView.isShow?"打开":"关闭"));
     }
 
     /**
@@ -367,4 +400,6 @@ public class MainActivity extends AppCompatActivity implements PickView.OnSelect
 
         return "";
     }
+
+
 }

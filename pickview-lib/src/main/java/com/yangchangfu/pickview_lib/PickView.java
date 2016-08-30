@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * Created by apple on 16/4/25.
  */
 public class PickView extends LinearLayout implements OnWheelChangedListener, View.OnClickListener {
@@ -42,6 +44,7 @@ public class PickView extends LinearLayout implements OnWheelChangedListener, Vi
     private int [] selectedIndexs;
 
     private OnSelectListener onSelectListener = null;
+    private OnStateChangeListener onStateChangeListener = null;
 
     public boolean isShow = false;
 
@@ -175,13 +178,19 @@ public class PickView extends LinearLayout implements OnWheelChangedListener, Vi
             throw new IllegalArgumentException("index - 参数不匹配, index不能大于" + String.valueOf(mCount - 1) + "或不能小于0");
         }
 
+        String[] items;
         if (lists.size() == 0 || lists == null){
-            throw new IllegalArgumentException("lists - 参数不匹配, lists不能为null或空");
+            //return;
+            //throw new IllegalArgumentException("lists - 参数不匹配, lists不能为null或空");
+            items = new String[0];
+
+            mDatas[index] = items;
+        } else {
+            items =  (String[])lists.toArray(new String[lists.size()]);
+
+            mDatas[index] = items;
         }
 
-        String[] items =  (String[])lists.toArray(new String[lists.size()]);
-
-        mDatas[index] = items;
 
 //        wheelViews[index] = new WheelView(mContext);
 //        wheelViews[index].setLayoutParams(new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1));
@@ -240,6 +249,7 @@ public class PickView extends LinearLayout implements OnWheelChangedListener, Vi
         mPopWindow.setFocusable(false);
         mPopWindow.setOutsideTouchable(false);
         mPopWindow.showAtLocation(mRelativeLayout, Gravity.BOTTOM, 0, 0);
+        mPopWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);//http://blog.csdn.net/u013277740/article/details/50427523
 
         // popView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框
         mRelativeLayout.setOnTouchListener(new OnTouchListener() {
@@ -252,6 +262,10 @@ public class PickView extends LinearLayout implements OnWheelChangedListener, Vi
         });
 
         isShow = true;
+
+        if (onStateChangeListener != null){
+            onStateChangeListener.OnStateChange(this, isShow);
+        }
     }
 
     public void dismiss(){
@@ -260,6 +274,10 @@ public class PickView extends LinearLayout implements OnWheelChangedListener, Vi
             mPopWindow.dismiss();
             mPopWindow = null;
             isShow = false;
+
+            if (onStateChangeListener != null){
+                onStateChangeListener.OnStateChange(this, isShow);
+            }
         }
     }
 
@@ -282,6 +300,7 @@ public class PickView extends LinearLayout implements OnWheelChangedListener, Vi
     @Override
     public void onChanged(WheelView wheel, int oldValue, int newValue) {
         int index = (int) wheel.getTag();
+
 
         if (mCount == 1){
             int pCurrent = wheelViews[index].getCurrentItem();
@@ -411,14 +430,41 @@ public class PickView extends LinearLayout implements OnWheelChangedListener, Vi
 
     private void setSelectedTextView(){
 
+        String value1 = "";
+        String value2 = "";
+        String value3 = "";
+
         if (mCount == 1){
-            selectedTextView.setText(mItems.get(selectedIndexs[0]).name);
+            if (mItems.size() > 0){
+                value1 = mItems.get(selectedIndexs[0]).name;
+            }
+
+            selectedTextView.setText(value1);
         }
         else if (mCount == 2){
-            selectedTextView.setText(mItems.get(selectedIndexs[0]).name + "-" + mItems.get(selectedIndexs[0]).items.get(selectedIndexs[1]).name);
+            if (mItems.size() > 0){
+                value1 = mItems.get(selectedIndexs[0]).name;
+
+                if (mItems.get(selectedIndexs[0]).items.size() > 0){
+                    value2 = mItems.get(selectedIndexs[0]).items.get(selectedIndexs[1]).name;
+                }
+            }
+
+            selectedTextView.setText(value1 + "-" + value2);
         }
         else if (mCount == 3){
-            selectedTextView.setText(mItems.get(selectedIndexs[0]).name + "-" + mItems.get(selectedIndexs[0]).items.get(selectedIndexs[1]).name + "-" + mItems.get(selectedIndexs[0]).items.get(selectedIndexs[1]).items.get(selectedIndexs[2]).name);
+            if (mItems.size() > 0){
+                value1 = mItems.get(selectedIndexs[0]).name;
+
+                if (mItems.get(selectedIndexs[0]).items.size() > 0){
+                    value2 = mItems.get(selectedIndexs[0]).items.get(selectedIndexs[1]).name;
+
+                    if (mItems.get(selectedIndexs[0]).items.get(selectedIndexs[1]).items.size() > 0){
+                        value3 = mItems.get(selectedIndexs[0]).items.get(selectedIndexs[1]).items.get(selectedIndexs[2]).name;
+                    }
+                }
+            }
+            selectedTextView.setText(value1 + "-" + value2 + "-" + value3);
         }
     }
 
@@ -432,5 +478,13 @@ public class PickView extends LinearLayout implements OnWheelChangedListener, Vi
 
     public interface OnSelectListener {
         void OnSelectItemClick(View view, int[] selectedIndexs, String selectedText);
+    }
+
+    public void setOnStateChangeListener(OnStateChangeListener onStateChangeListener){
+        this.onStateChangeListener = onStateChangeListener;
+    }
+
+    public interface OnStateChangeListener {
+        void OnStateChange(View view, boolean state);
     }
 }

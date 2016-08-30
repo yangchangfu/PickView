@@ -34,4 +34,25 @@
         android:onClick="readStateClick"
         android:text="读取所有状态" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text=""
+        android:id="@+id/textView1"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text=""
+        android:id="@+id/textView2"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text=""
+        android:id="@+id/textView3"/>
+
 </LinearLayout>
