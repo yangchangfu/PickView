@@ -35,20 +35,16 @@ pickView.show();
 ```
 
 ##Demo
-![preview_1](https://github.com/yangchangfu/PickView/blob/master/images/demo.gif)
 ![preview_1](https://github.com/yangchangfu/PickView/blob/master/ww.gif)
 <p>
     <img src="https://github.com/yangchangfu/PickView/blob/master/device-2016-08-30-114219.png" width="260" alt="Screenshot" />
-    <img src="https://github.com/yangchangfu/PickView/blob/master/images/1.png" width="260" alt="Screenshot" />
-    <img src="https://github.com/yangchangfu/PickView/blob/master/images/2.png" width="260" alt="Screenshot" />
-    <img src="https://github.com/yangchangfu/PickView/blob/master/images/3.png" width="260" alt="Screenshot" />
 </p>
 
 ##Gradle
 
 ```groovy
 dependencies{
-    compile 'com.yangchangfu:pickview-lib:1.0.2'
+    compile 'com.yangchangfu:pickview-lib:1.0.3'
 }
 
 ```
@@ -60,6 +56,8 @@ dependencies{
 2、v1.0.2版本解决的问题：
    （1）多级同时滑动奔溃的问题；
    （2）Android部分手机存在虚拟键盘的遮挡问题；
+   
+1、v1.0.3版本新增了PickView弹出视图的状态监听事件接口：OnStateChangeListener；
 
 # Usage
 
