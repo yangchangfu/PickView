@@ -39,6 +39,7 @@ pickView.show();
 ![preview_1](https://github.com/yangchangfu/PickView/blob/master/images/demo.gif)
 
 <p>
+    <img src="https://github.com/yangchangfu/PickView/blob/master/device-2016-08-30-114219.png" width="260" alt="Screenshot" />
     <img src="https://github.com/yangchangfu/PickView/blob/master/images/1.png" width="260" alt="Screenshot" />
     <img src="https://github.com/yangchangfu/PickView/blob/master/images/2.png" width="260" alt="Screenshot" />
     <img src="https://github.com/yangchangfu/PickView/blob/master/images/3.png" width="260" alt="Screenshot" />
